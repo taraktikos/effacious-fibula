@@ -1,7 +1,8 @@
-package com.user.service;
+package com.user.security;
 
 import com.user.persistence.entity.User;
 import com.user.persistence.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
+@Slf4j
 @Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
@@ -22,6 +24,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        log.debug("Authenticating {}", email);
         return userRepository.findByEmailIgnoreCase(email).map(user ->
                 new org.springframework.security.core.userdetails.User(
                         user.getEmail(),

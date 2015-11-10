@@ -1,6 +1,6 @@
 package com.user.config;
 
-import com.user.service.UserDetailsService;
+import com.user.security.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.encoding.PlaintextPasswordEncoder;
