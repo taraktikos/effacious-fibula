@@ -24,6 +24,7 @@
 		<bootstrap.version>3.3.5</bootstrap.version>
 		<jquery.version>2.1.4</jquery.version>
 		<thymeleaf.extras.version>2.1.2.RELEASE</thymeleaf.extras.version>
+		<mongodb.version>3.1.0</mongodb.version>
 	</properties>
 
 	<dependencies>
