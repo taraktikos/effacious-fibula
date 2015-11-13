@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
 <head>
-    <title>Login</title>
+    <title>User list</title>
 </head>
 <body>
     <div layout:fragment="content" class="container">
-        <h1 sec:authorize="!isAuthenticated()">Please login</h1>
-        <h1 sec:authorize="isAuthenticated()">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <h1>Users list</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th><a th:href="@{/users(sort=(${page?.sort?.getOrderFor('email')?.ascending} ? 'email,desc' : 'email,asc'))}">Email</a></th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${page.content}">
+                <td th:text="${{user.email}}"></td>
+                <td th:text="${{user.firstName}}"></td>
+                <td th:text="${{user.lastName}}"></td>
+                <td th:text="${{user.roles}}"></td>
+                <td>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a class="btn btn-primary btn-sm" th:href="@{/users/edit/{id}(id=${user.id})}">Update</a>
+                        <a class="btn btn-danger btn-sm" th:href="@{/users/remove/{id}(id=${user.id})}">Delete</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div th:fragment='paginationbar'>
+            <div>
+                <ul class='pagination pagination-centered'>
+                    <li th:class="${page.first}? 'disabled' : ''">
+                        <span th:if='${page.first}'>«</span>
+                        <a th:if='${not page.first}' title='Go to previous page' >«</a>
+                    </li>
+                    <li th:class="${page.last}? 'disabled' : ''">
+                        <span th:if='${page.last}'>»</span>
+                        <a th:if='${not page.last}' title='Go to next page' th:href="@{/users(page=(${page?.nextPageable()?.getNumber()}))}">»</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" th:href="@{/users/create}" href="./form.html">Create</a>
     </div>
 </body>
 </html>
