@@ -23,7 +23,7 @@ public class User {
     private List<Roles> roles;
 
     public enum Roles {
-        ROLE_ADMIN, ROLE_RETAILER, ROLE_USER
+        ROLE_ADMIN, ROLE_USER
     }
 
 }
