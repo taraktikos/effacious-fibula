@@ -36,12 +36,12 @@
             <div>
                 <ul class='pagination pagination-centered'>
                     <li th:class="${page.first}? 'disabled' : ''">
-                        <span th:if='${page.first}'>«</span>
-                        <a th:if='${not page.first}' title='Go to previous page' >«</a>
+                        <span th:if="${page.first}">«</span>
+                        <a th:if="${not page.first}" title="Go to previous page" th:href="@{/users(page=(${page?.previousPageable()?.pageNumber}))}">«</a>
                     </li>
                     <li th:class="${page.last}? 'disabled' : ''">
-                        <span th:if='${page.last}'>»</span>
-                        <a th:if='${not page.last}' title='Go to next page' th:href="@{/users(page=(${page?.nextPageable()?.getNumber()}))}">»</a>
+                        <span th:if="${page.last}">»</span>
+                        <a th:if="${not page.last}" title="Go to next page" th:href="@{/users(page=(${page?.nextPageable()?.pageNumber}))}">»</a>
                     </li>
                 </ul>
             </div>
