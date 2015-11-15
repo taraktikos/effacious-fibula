@@ -23,8 +23,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/}" href="welcome/index.html">Home</a></li>
-                    <li class="active"><a th:href="@{/users}" href="users/index.html">Users</a></li>
+                    <li th:classappend="${(#httpServletRequest.requestURI.equals('/')) ? 'active' : ''}"><a th:href="@{/}" href="welcome/index.html">Home</a></li>
+                    <li th:classappend="${(#httpServletRequest.requestURI.equals('/users')) ? 'active' : '' }"><a th:href="@{/users}" href="users/index.html">Users</a></li>
                 </ul>
             </div>
         </div>
