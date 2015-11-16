@@ -20,7 +20,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
-    private List<Roles> roles;
+    private String role;
 
     public enum Roles {
         ROLE_ADMIN, ROLE_USER

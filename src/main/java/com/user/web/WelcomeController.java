@@ -36,14 +36,14 @@ public class WelcomeController {
                 .password("123456")
                 .firstName("Firstname")
                 .lastName("lastname")
-                .roles(Collections.singletonList(User.Roles.ROLE_ADMIN))
+                .role(User.Roles.ROLE_ADMIN.name())
                 .build();
         User user = User.builder()
                 .email("user@gmail.com")
                 .password("123456")
                 .firstName("User")
                 .lastName("lastname")
-                .roles(Collections.singletonList(User.Roles.ROLE_USER))
+                .role(User.Roles.ROLE_USER.name())
                 .build();
         userRepository.deleteAll();
         log.debug("Delete all users");
