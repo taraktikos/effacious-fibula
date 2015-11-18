@@ -6,10 +6,11 @@
 <body>
     <div layout:fragment="content" class="container">
         <h1>Users list</h1>
-        <a class="btn btn-primary" th:href="@{/users/create}" href="./form.html">Create</a>
+        <a class="btn btn-primary" th:href="@{/users/create}" href="./_form.html">Create</a>
         <table class="table">
             <thead>
             <tr>
+                <th>Photo</th>
                 <th><a th:href="@{/users(sort=(${page?.sort?.getOrderFor('email')?.ascending} ? 'email,desc' : 'email,asc'))}">Email</a></th>
                 <th>First name</th>
                 <th>Last name</th>
@@ -19,6 +20,7 @@
             </thead>
             <tbody>
             <tr th:each="user: ${page.content}">
+                <td><img th:if="${user.photo}" th:src="@{/media/cache/media.user.list/{path}(path=${@userService.getPathToImg(user)})}" /></td>
                 <td th:text="${{user.email}}"></td>
                 <td th:text="${{user.firstName}}"></td>
                 <td th:text="${{user.lastName}}"></td>
