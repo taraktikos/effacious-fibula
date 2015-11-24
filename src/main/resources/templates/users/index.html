@@ -29,26 +29,26 @@
                     <!--<div sec:authorize="hasRole('ROLE_ADMIN')">-->
                     <div>
                         <a class="btn btn-primary btn-sm" th:href="@{/users/edit/{id}(id=${user.id})}">Update</a>
-                        <a class="btn btn-danger btn-sm" th:href="@{/users/remove/{id}(id=${user.id})}">Delete</a>
+                        <form style="display:inline-block;" th:action="@{/users/delete/{id}(id=${user.id})}" th:method="post">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
                     </div>
                 </td>
             </tr>
             </tbody>
         </table>
 
-        <div th:fragment='paginationbar'>
-            <div>
-                <ul class='pagination pagination-centered'>
-                    <li th:class="${page.first}? 'disabled' : ''">
-                        <span th:if="${page.first}">«</span>
-                        <a th:if="${not page.first}" title="Go to previous page" th:href="@{/users(page=(${page?.previousPageable()?.pageNumber}))}">«</a>
-                    </li>
-                    <li th:class="${page.last}? 'disabled' : ''">
-                        <span th:if="${page.last}">»</span>
-                        <a th:if="${not page.last}" title="Go to next page" th:href="@{/users(page=(${page?.nextPageable()?.pageNumber}))}">»</a>
-                    </li>
-                </ul>
-            </div>
+        <div th:if="${page.getTotalPages() > 1}">
+            <ul class="pagination pagination-centered">
+                <li th:class="${page.first}? 'disabled' : ''">
+                    <span th:if="${page.first}">«</span>
+                    <a th:if="${not page.first}" title="Go to previous page" th:href="@{/users(page=(${page?.previousPageable()?.pageNumber}))}">«</a>
+                </li>
+                <li th:class="${page.last}? 'disabled' : ''">
+                    <span th:if="${page.last}">»</span>
+                    <a th:if="${not page.last}" title="Go to next page" th:href="@{/users(page=(${page?.nextPageable()?.pageNumber}))}">»</a>
+                </li>
+            </ul>
         </div>
     </div>
 </body>
