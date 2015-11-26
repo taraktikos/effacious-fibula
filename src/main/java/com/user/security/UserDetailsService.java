@@ -27,6 +27,9 @@ public class UserDetailsService implements org.springframework.security.core.use
                         user.getPassword(),
                         newArrayList(new SimpleGrantedAuthority(user.getRole()))
                 )
-        ).orElseThrow(() -> new UsernameNotFoundException(format("User with email=%s was not found", email)));
+        ).orElseThrow(() -> {
+            log.debug("User '{}' not found", email);
+            return new UsernameNotFoundException(format("User with email=%s was not found", email));
+        });
     }
 }

@@ -62,7 +62,7 @@ public class UserService {
             try {
                 Files.createDirectories(path.getParent());
                 Files.write(path, file.getBytes());
-                log.info("Image saved to {}", path);
+                log.debug("Image saved to {}", path);
                 return path.getFileName().toString();
             } catch (IOException e) {
                 log.error("Image does not saved. {}", e.getMessage());
