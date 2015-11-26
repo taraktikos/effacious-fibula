@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-group" th:classappend="${#fields.hasErrors('photoVirtual')} ? 'has-error'">
-            <label for="photoVirtual" class="col-sm-2 control-label">Photo</label>
+            <label th:for="${#ids.next('photoVirtual')}" class="col-sm-2 control-label">Photo</label>
             <div class="col-sm-10">
                 <img th:if="${userDto.photo}" th:src="@{/media/cache/media.user.list/{path}(path=${@userService.getPathToImg(userDto)})}" />
                 <input type="file" th:field="*{photoVirtual}"/>
@@ -24,35 +24,39 @@
         </div>
 
         <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-error'">
-            <label for="email" class="col-sm-2 control-label">Email</label>
+            <label th:for="${#ids.next('email')}" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" placeholder="Email" th:field="*{email}"/>
             </div>
         </div>
 
         <div class="form-group" th:classappend="${#fields.hasErrors('firstName')} ? 'has-error'">
-            <label for="firstName" class="col-sm-2 control-label">firstName</label>
+            <label th:for="${#ids.next('firstName')}" class="col-sm-2 control-label">firstName</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" placeholder="firstName" th:field="*{firstName}"/>
             </div>
         </div>
 
         <div class="form-group" th:classappend="${#fields.hasErrors('lastName')} ? 'has-error'">
-            <label for="lastName" class="col-sm-2 control-label">lastName</label>
+            <label th:for="${#ids.next('lastName')}" class="col-sm-2 control-label">lastName</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" placeholder="lastName" th:field="*{lastName}"/>
             </div>
         </div>
 
         <div class="form-group" th:classappend="${#fields.hasErrors('role')} ? 'has-error'">
-            <label for="role" class="col-sm-2 control-label">role</label>
+            <label th:for="${#ids.next('role')}" class="col-sm-2 control-label">role</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="role" th:field="*{role}"/>
+                <select class="form-control" th:field="*{role}">
+                    <option th:each="role:${roles}"
+                            th:value="${role}"
+                            th:text="${role}"></option>
+                </select>
             </div>
         </div>
 
         <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
-            <label for="password" class="col-sm-2 control-label">password</label>
+            <label th:for="${#ids.next('password')}" class="col-sm-2 control-label">password</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" placeholder="password" th:field="*{password}"/>
             </div>
