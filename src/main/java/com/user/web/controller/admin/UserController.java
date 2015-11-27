@@ -1,4 +1,4 @@
-package com.user.web;
+package com.user.web.controller.admin;
 
 import com.user.persistence.entity.User;
 import com.user.service.UserService;
@@ -21,7 +21,7 @@ import java.util.Objects;
 
 @Slf4j
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/admin/users")
 public class UserController {
 
     @Autowired
@@ -32,13 +32,14 @@ public class UserController {
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String index(Model model, @PageableDefault(size = 10) Pageable pageable) throws Exception {
         model.addAttribute("page", mapper.mapAsPage(userService.findAll(pageable), UserDto.class));
-        return "users/index";
+        return "admin/users/index";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
         model.addAttribute("userDto", new UserDto());
-        return "users/create";
+        model.addAttribute("roles", User.Roles.values());
+        return "admin/users/create";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -46,21 +47,23 @@ public class UserController {
         if (!bindingResult.hasErrors()) {
             User user = mapper.map(userDto, User.class);
             userService.save(user);
-            if (Objects.nonNull(userDto.getPhotoVirtual()) && !userDto.getPhotoVirtual().isEmpty()) {
+            if (!userDto.getPhotoVirtual().isEmpty()) {
                 user.setPhoto(userService.savePicture(user, userDto.getPhotoVirtual()));
                 userService.save(user);
             }
-            return "redirect:/users";
+            return "redirect:/admin/users";
         }
         model.addAttribute("userDto", userDto);
-        return "users/create";
+        model.addAttribute("roles", User.Roles.values());
+        return "admin/users/create";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable String id, Model model) {
         return userService.findOne(id).map(user -> {
             model.addAttribute("userDto", mapper.map(user, UserDto.class));
-            return "users/edit";
+            model.addAttribute("roles", User.Roles.values());
+            return "admin/users/edit";
         }).orElse("errors/404");
     }
 
@@ -74,10 +77,11 @@ public class UserController {
                     user.setPhoto(userService.savePicture(user, userDto.getPhotoVirtual()));
                 }
                 userService.save(user);
-                return "redirect:/users";
+                return "redirect:/admin/users";
             }
             model.addAttribute("userDto", mapper.map(user, UserDto.class));
-            return "users/edit";
+            model.addAttribute("roles", User.Roles.values());
+            return "admin/users/edit";
         }).orElse("errors/404");
     }
 
@@ -85,7 +89,7 @@ public class UserController {
     public String delete(@PathVariable String id) {
         return userService.findOne(id).map(user -> {
             userService.delete(user);
-            return "redirect:/users";
+            return "redirect:/admin/users";
         }).orElse("errors/404");
     }
 

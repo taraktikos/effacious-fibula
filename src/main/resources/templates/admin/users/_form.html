@@ -6,7 +6,7 @@
 <body>
 <div th:fragment="form">
 
-    <form class="form-horizontal" id="userForm" th:action="${userDto.isNew()} ? @{/users/create} : @{/users/update/{id}(id=${userDto.id})}" th:object="${userDto}" action="#"
+    <form class="form-horizontal" id="userForm" th:action="${userDto.isNew()} ? @{/admin/users/create} : @{/admin/users/update/{id}(id=${userDto.id})}" th:object="${userDto}" action="#"
           method="post" enctype="multipart/form-data">
         <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger col-sm-offset-2 col-sm-10">
             <p th:each="error : ${#fields.errors('*')}"
@@ -65,7 +65,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-primary" th:text="${userDto.isNew()} ? 'Create' : 'Update'">Create</button>
-                <a class="btn btn-default" th:href="@{/users}">Cancel</a>
+                <a class="btn btn-default" th:href="@{/admin/users}">Cancel</a>
             </div>
         </div>
     </form>

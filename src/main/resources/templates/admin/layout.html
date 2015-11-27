@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-    <title>User management</title>
+    <title>User management admin</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.5/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
@@ -19,15 +19,15 @@
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" th:href="@{/}" href="welcome/index.html">User management</a>
+                <a class="navbar-brand" th:href="@{/admin}" href="main/index.html">User management admin</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li th:classappend="${(#httpServletRequest.requestURI.equals('/')) ? 'active' : ''}"><a th:href="@{/}" href="welcome/index.html">Home</a></li>
+                    <li th:classappend="${(#httpServletRequest.requestURI.equals('/admin')) ? 'active' : ''}"><a th:href="@{/admin}" href="main/index.html">Home</a></li>
+                    <li th:classappend="${(#httpServletRequest.requestURI.equals('/admin/users')) ? 'active' : '' }"><a th:href="@{/admin/users}" href="users/index.html">Users</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li th:classappend="${(#httpServletRequest.requestURI.equals('/login')) ? 'active' : '' }" sec:authorize="!isAuthenticated()"><a href="../login.html" th:href="@{/login}">Login</a></li>
-                    <li sec:authorize="isAuthenticated()" class="dropdown">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span sec:authentication="name"></span> <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#" th:href="@{/profile}">Profile</a></li>
@@ -46,7 +46,7 @@
     </div>
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2015 Spring boot users management boilerplate</p>
+            <p>&copy; 2015 Spring boot users management boilerplate admin</p>
         </div>
     </footer>
 </body>
