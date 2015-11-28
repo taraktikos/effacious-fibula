@@ -6,12 +6,12 @@
 <body>
     <div layout:fragment="content" class="container">
         <h1>Users list</h1>
-        <a class="btn btn-primary" th:href="@{/users/create}" href="./_form.html">Create</a>
+        <a class="btn btn-primary" th:href="@{/admin/users/create}" href="./_form.html">Create</a>
         <table class="table">
             <thead>
             <tr>
                 <th>Photo</th>
-                <th><a th:href="@{/users(sort=(${page?.sort?.getOrderFor('email')?.ascending} ? 'email,desc' : 'email,asc'))}">Email</a></th>
+                <th><a th:href="@{/admin/users(sort=(${page?.sort?.getOrderFor('email')?.ascending} ? 'email,desc' : 'email,asc'))}">Email</a></th>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Role</th>
@@ -28,8 +28,8 @@
                 <td>
                     <!--<div sec:authorize="hasRole('ROLE_ADMIN')">-->
                     <div>
-                        <a class="btn btn-primary btn-sm" th:href="@{/users/edit/{id}(id=${user.id})}">Update</a>
-                        <form style="display:inline-block;" th:action="@{/users/delete/{id}(id=${user.id})}" th:method="post">
+                        <a class="btn btn-primary btn-sm" th:href="@{/admin/users/edit/{id}(id=${user.id})}">Update</a>
+                        <form style="display:inline-block;" th:action="@{/admin/users/delete/{id}(id=${user.id})}" th:method="post">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </div>
@@ -42,11 +42,11 @@
             <ul class="pagination pagination-centered">
                 <li th:class="${page.first}? 'disabled' : ''">
                     <span th:if="${page.first}">«</span>
-                    <a th:if="${not page.first}" title="Go to previous page" th:href="@{/users(page=(${page?.previousPageable()?.pageNumber}))}">«</a>
+                    <a th:if="${not page.first}" title="Go to previous page" th:href="@{/admin/users(page=(${page?.previousPageable()?.pageNumber}))}">«</a>
                 </li>
                 <li th:class="${page.last}? 'disabled' : ''">
                     <span th:if="${page.last}">»</span>
-                    <a th:if="${not page.last}" title="Go to next page" th:href="@{/users(page=(${page?.nextPageable()?.pageNumber}))}">»</a>
+                    <a th:if="${not page.last}" title="Go to next page" th:href="@{/admin/users(page=(${page?.nextPageable()?.pageNumber}))}">»</a>
                 </li>
             </ul>
         </div>
