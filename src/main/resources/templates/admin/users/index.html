@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="admin/layout">
 <head>
     <title>User list</title>
 </head>
@@ -11,7 +12,9 @@
             <thead>
             <tr>
                 <th>Photo</th>
-                <th><a th:href="@{/admin/users(sort=(${page?.sort?.getOrderFor('email')?.ascending} ? 'email,desc' : 'email,asc'))}">Email</a></th>
+                <th>
+                    <a th:href="@{/admin/users(sort=(${page?.sort?.getOrderFor('email')?.ascending} ? 'email,desc' : 'email,asc'))}">Email</a>
+                </th>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Role</th>
@@ -20,16 +23,18 @@
             </thead>
             <tbody>
             <tr th:each="user: ${page.content}">
-                <td><img th:if="${user.photo}" th:src="@{/media/cache/media.user.list/{path}(path=${@userService.getPathToImg(user)})}" /></td>
+                <td><img th:if="${user.photo}"
+                         th:src="@{/media/cache/media.user.list/{path}(path=${@userService.getPathToImg(user)})}"/></td>
                 <td th:text="${{user.email}}"></td>
                 <td th:text="${{user.firstName}}"></td>
                 <td th:text="${{user.lastName}}"></td>
-                <td th:text="${{user.role}}"></td>
+                <td th:text="${{user.roles}}"></td>
                 <td>
-                    <!--<div sec:authorize="hasRole('ROLE_ADMIN')">-->
                     <div>
+                        <a th:href="@{/switch_user(email=${user.email})}">Switch</a>
                         <a class="btn btn-primary btn-sm" th:href="@{/admin/users/edit/{id}(id=${user.id})}">Update</a>
-                        <form style="display:inline-block;" th:action="@{/admin/users/delete/{id}(id=${user.id})}" th:method="post">
+                        <form style="display:inline-block;" th:action="@{/admin/users/delete/{id}(id=${user.id})}"
+                              th:method="post">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </div>
@@ -42,11 +47,13 @@
             <ul class="pagination pagination-centered">
                 <li th:class="${page.first}? 'disabled' : ''">
                     <span th:if="${page.first}">«</span>
-                    <a th:if="${not page.first}" title="Go to previous page" th:href="@{/admin/users(page=(${page?.previousPageable()?.pageNumber}))}">«</a>
+                    <a th:if="${not page.first}" title="Go to previous page"
+                       th:href="@{/admin/users(page=(${page?.previousPageable()?.pageNumber}))}">«</a>
                 </li>
                 <li th:class="${page.last}? 'disabled' : ''">
                     <span th:if="${page.last}">»</span>
-                    <a th:if="${not page.last}" title="Go to next page" th:href="@{/admin/users(page=(${page?.nextPageable()?.pageNumber}))}">»</a>
+                    <a th:if="${not page.last}" title="Go to next page"
+                       th:href="@{/admin/users(page=(${page?.nextPageable()?.pageNumber}))}">»</a>
                 </li>
             </ul>
         </div>

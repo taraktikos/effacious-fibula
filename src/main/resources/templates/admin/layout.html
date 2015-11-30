@@ -13,6 +13,15 @@
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 
+    <script th:src="@{/js/speakingurl.js}"></script>
+    <script th:src="@{/js/jquery.stringToSlug.min.js}"></script>
+    <script>
+        $(document).ready( function() {
+            $(".slugify").stringToSlug({
+                getPut: $(".slugify").data('target')
+            });
+        });
+    </script>
     <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
 </head>
 <body>
@@ -25,6 +34,8 @@
                 <ul class="nav navbar-nav">
                     <li th:classappend="${(#httpServletRequest.requestURI.equals('/admin')) ? 'active' : ''}"><a th:href="@{/admin}" href="main/index.html">Home</a></li>
                     <li th:classappend="${(#httpServletRequest.requestURI.equals('/admin/users')) ? 'active' : '' }"><a th:href="@{/admin/users}" href="users/index.html">Users</a></li>
+                    <li th:classappend="${(#httpServletRequest.requestURI.equals('/admin/articles')) ? 'active' : '' }"><a th:href="@{/admin/articles}" href="articles/index.html">Articles</a></li>
+                    <li><a th:href="@{/}" href="../welcome/index.html">Frontend</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
