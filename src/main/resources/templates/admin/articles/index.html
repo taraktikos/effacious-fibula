@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="admin/layout">
+<head>
+    <title>Article list</title>
+</head>
+<body>
+    <div layout:fragment="content" class="container">
+        <h1>Articles list</h1>
+        <a class="btn btn-primary" th:href="@{/admin/articles/create}" href="./_form.html">Create</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="article: ${page.content}">
+                <td th:text="${{article.title}}"></td>
+                <td th:text="${{article.createdAt}}"></td>
+                <td>
+                    <div>
+                        <a class="btn btn-primary btn-sm" th:href="@{/admin/articles/edit/{id}(id=${article.id})}">Update</a>
+                        <form style="display:inline-block;" th:action="@{/admin/articles/delete/{id}(id=${article.id})}"
+                              th:method="post">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div th:if="${page.getTotalPages() > 1}">
+            <ul class="pagination pagination-centered">
+                <li th:class="${page.first}? 'disabled' : ''">
+                    <span th:if="${page.first}">«</span>
+                    <a th:if="${not page.first}" title="Go to previous page"
+                       th:href="@{/admin/users(page=(${page?.previousPageable()?.pageNumber}))}">«</a>
+                </li>
+                <li th:class="${page.last}? 'disabled' : ''">
+                    <span th:if="${page.last}">»</span>
+                    <a th:if="${not page.last}" title="Go to next page"
+                       th:href="@{/admin/users(page=(${page?.nextPageable()?.pageNumber}))}">»</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
