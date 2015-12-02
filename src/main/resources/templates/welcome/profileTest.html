@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title>Manager</title>
+</head>
+<body>
+    <h1>Manager</h1>
+    <div layout:fragment="content">
+        <h1 sec:authorize="isAuthenticated()" th:inline="text">Hello manager [[${#httpServletRequest.remoteUser}]]!</h1>
+    </div>
+</body>
+</html>
