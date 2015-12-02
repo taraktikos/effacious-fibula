@@ -28,6 +28,7 @@
 		<guava.version>19.0-rc2</guava.version>
 		<orika.version>1.4.5</orika.version>
 		<thumbnailator.version>0.4.8</thumbnailator.version>
+		<joda-time.version>2.9.1</joda-time.version>
 	</properties>
 
 	<dependencies>
@@ -100,6 +101,11 @@
 			<groupId>net.coobird</groupId>
 			<artifactId>thumbnailator</artifactId>
 			<version>${thumbnailator.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
 		</dependency>
 
 		<dependency>
