@@ -6,6 +6,7 @@ import com.user.web.dto.UserDto;
 import com.user.web.mapping.Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Objects;
 
 @Slf4j
 @Controller
@@ -46,12 +46,16 @@ public class UserController {
     public String save(@Valid UserDto userDto, BindingResult bindingResult, Model model) {
         if (!bindingResult.hasErrors()) {
             User user = mapper.map(userDto, User.class);
-            userService.save(user);
-            if (!userDto.getPhotoVirtual().isEmpty()) {
-                user.setPhoto(userService.savePicture(user, userDto.getPhotoVirtual()));
+            try {
                 userService.save(user);
+                if (!userDto.getPhotoVirtual().isEmpty()) {
+                    user.setPhoto(userService.savePicture(user, userDto.getPhotoVirtual()));
+                    userService.save(user);
+                }
+                return "redirect:/admin/users";
+            } catch (DuplicateKeyException e) {
+                bindingResult.rejectValue("email", "", "Email must be unique");
             }
-            return "redirect:/admin/users";
         }
         model.addAttribute("userDto", userDto);
         model.addAttribute("roles", User.Roles.values());
@@ -76,10 +80,14 @@ public class UserController {
                     userService.deletePicture(user);
                     user.setPhoto(userService.savePicture(user, userDto.getPhotoVirtual()));
                 }
-                userService.save(user);
-                return "redirect:/admin/users";
+                try {
+                    userService.save(user);
+                    return "redirect:/admin/users";
+                } catch (DuplicateKeyException e) {
+                    bindingResult.rejectValue("email", "", "Email must be unique");
+                }
             }
-            model.addAttribute("userDto", mapper.map(user, UserDto.class));
+            model.addAttribute("userDto", userDto);
             model.addAttribute("roles", User.Roles.values());
             return "admin/users/edit";
         }).orElse("errors/404");
