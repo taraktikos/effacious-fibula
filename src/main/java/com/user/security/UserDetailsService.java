@@ -8,7 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import static com.google.common.collect.Lists.newArrayList;
+import java.util.stream.Collectors;
+
 import static java.lang.String.format;
 
 @Slf4j
@@ -25,7 +26,7 @@ public class UserDetailsService implements org.springframework.security.core.use
                 new org.springframework.security.core.userdetails.User(
                         user.getEmail(),
                         user.getPassword(),
-                        newArrayList(new SimpleGrantedAuthority(user.getRole()))
+                        user.getRoles().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList())
                 )
         ).orElseThrow(() -> {
             log.debug("User '{}' not found", email);
