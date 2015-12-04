@@ -18,6 +18,7 @@
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Role</th>
+                <th>Pass</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -29,6 +30,7 @@
                 <td th:text="${{user.firstName}}"></td>
                 <td th:text="${{user.lastName}}"></td>
                 <td th:text="${{user.roles}}"></td>
+                <td th:text="${{user.password}}"></td>
                 <td>
                     <div>
                         <a th:href="@{/switch_user(email=${user.email})}">Switch</a>

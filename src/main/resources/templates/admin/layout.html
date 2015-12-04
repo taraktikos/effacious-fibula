@@ -35,6 +35,8 @@
                     <li th:classappend="${(#httpServletRequest.requestURI.equals('/admin')) ? 'active' : ''}"><a th:href="@{/admin}" href="main/index.html">Home</a></li>
                     <li th:classappend="${(#httpServletRequest.requestURI.equals('/admin/users')) ? 'active' : '' }"><a th:href="@{/admin/users}" href="users/index.html">Users</a></li>
                     <li th:classappend="${(#httpServletRequest.requestURI.equals('/admin/articles')) ? 'active' : '' }"><a th:href="@{/admin/articles}" href="articles/index.html">Articles</a></li>
+                    <li th:classappend="${(#httpServletRequest.requestURI.equals('/admin/halls')) ? 'active' : '' }"><a th:href="@{/admin/halls}" href="halls/index.html">Halls</a></li>
+                    <li th:classappend="${(#httpServletRequest.requestURI.equals('/admin/cache/clear')) ? 'active' : '' }"><a th:href="@{/admin/cache/clear}" href="#">Cache clear</a></li>
                     <li><a th:href="@{/}" href="../welcome/index.html">Frontend</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
