@@ -15,16 +15,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
 import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
 
 @Slf4j
 @Component
-public class ArticleService implements FieldValueExists {
+public class ArticleService {
 
     @Value("${upload.path}")
     String uploadPath;
@@ -87,11 +85,4 @@ public class ArticleService implements FieldValueExists {
         }
     }
 
-    @Override
-    public boolean fieldValueExists(String fieldName, Object value) throws UnsupportedOperationException {
-        if (!fieldName.equals("uri")) {
-            throw new UnsupportedOperationException("Field name not supported");
-        }
-        return nonNull(value) && articleRepository.findByUri(value.toString()).isPresent();
-    }
 }
