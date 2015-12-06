@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="admin/layout">
+<head>
+    <title>Hall create</title>
+</head>
+<body>
+    <div layout:fragment="content" class="container">
+        <h1>Hall create</h1>
+        <div th:replace="admin/halls/_form :: form">Form</div>
+    </div>
+</body>
+</html>
