@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
 <head>
-    <title>Welcome page</title>
+    <title>Банкетные залы Киева, банкетное меню, заказать банкет, кафе, рестораны для проведения банкетов. Аренда банкетного зала киев в Киеве недорого - bankets.com.ua</title>
 </head>
 <body>
-    <div layout:fragment="content" class="container">
-        <h1 sec:authorize="!isAuthenticated()">Please login</h1>
-        <h1 sec:authorize="isAuthenticated()" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <div layout:fragment="content" class="row">
+        <div th:each="hall: ${halls}" class="col-xs-6 col-sm-6 col-md-3 hall-list-item">
+            <div class="thumbnail">
+                <span>100 грн/час</span>
+                <a class="hall-link" th:href="@{/kyiv/{uri}(uri=${hall.uri})}">
+                    <img th:src="@{/media/cache/media.hall.list/hall/{id}/{name}(id=${hall.id}, name=${hall.images.get(0).name})}" />
+                </a>
+                <div class="caption">
+                    <a class="hall-link" th:href="@{/kyiv/{uri}(uri=${hall.uri})}">
+                        <h3 th:text="${hall.title}"></h3>
+                        <div class="clearfix">
+                            <div class="pull-left"><i class="fa fa-users"></i> 22-45</div>
+                            <div class="pull-right"><i class="fa fa-square"></i> 55 м<sup>2</sup></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <p>Сайт bankets.com.ua — украинский <strong>каталог банкетных залов</strong>, основная задача которого – упростить поиск и <strong>аренду зала в Киеве</strong>. Используйте удобный поиск, чтобы найти подходящие <strong>банкетные залы Киева</strong>, или другого крупного города Украины.</p>
+            <p>Выбрать <strong>банкетный зал для аренды</strong> очень легко: достаточно указать количество посадочных мест, список дополнительных услуг, ближайшую станцию метро и стоимость аренды зала. Система сама подберет для Вас банкетный зал, отвечающий заданным параметрам. Вам останется только подтвердить выбранное для <strong>аренды помещение</strong> и ждать звонка нашего менеджера. Сделать это нужно на специальной форме заказа зала.</p>
+            <p>Нам не важно, для каких целей Вам нужна <strong>аренда зала в Киеве</strong>. Мы показываем помещение – Вы выбираете и заказываете. У нас есть предложения <strong>аренды зала в Киеве почасово</strong>, либо <strong>аренды банкетного зала</strong> на целый день. Нам важно, чтобы помещение максимально отвечало требованиям клиента. Именно поэтому Вы сами можете отметить галочками оснащения зала и другие дополнительные характеристики.</p>
+            <p>На страничке описания есть дополнительная информация для выбора зала. Прежде чем выбрать помещение, посмотрите его фотографии. Перед тем, как забронировать банкетный зал, рекомендуется посмотреть месторасположение на карте, а также почитать отзывы. <strong>Аренда банкетнного зала</strong> с помощью сервиса bankets.com.ua гораздо удобнее, чем поиск помещения вручную.</p>
+        </div>
     </div>
 </body>
 </html>

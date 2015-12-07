@@ -23,3 +23,46 @@ body > .container {
 .footer p {
     margin: 10px 0;
 }
+
+
+.hall-link {
+    color: #444;
+}
+.hall-link:hover {
+    text-decoration: none;
+}
+
+.hall-address {
+    font-size: 12px;
+}
+
+#filter_type_city {
+    margin-bottom: 10px;
+}
+.thumbnail .caption .hall-link h3 {
+    font-size: 14px;
+    font-weight: bolder;
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.thumbnail span {
+    display: block;
+    background: #F3984D;
+    position: absolute;
+    min-width: 20px;
+    padding: 2px 5px;
+    color: white;
+    font-size: 20px;
+    opacity: 21;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-bottom-right-radius: 4px;
+}
+.thumbnail .caption .show-location a {
+    border-bottom: 1px dashed #444;
+}
+.thumbnail .caption .show-location a:hover {
+    text-decoration: none;
+    border-bottom: none;
+}

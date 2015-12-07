@@ -1,10 +1,13 @@
 package com.user.web.controller;
 
 import com.user.persistence.repository.UserRepository;
+import com.user.service.HallService;
 import com.user.service.MediaService;
+import com.user.web.dto.HallDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,9 +28,12 @@ public class WelcomeController {
     MediaService mediaService;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    HallService hallService;
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
-    public String index() throws Exception {
+    public String index(Model model) throws Exception {
+        model.addAttribute("halls", hallService.findAll());
         return "welcome/index";
     }
 

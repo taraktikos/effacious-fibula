@@ -2,14 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-    <title>User management</title>
+    <title>Банкетные залы Киева, банкетное меню, заказать банкет, кафе, рестораны для проведения банкетов. Аренда банкетного зала киев в Киеве недорого - bankets.com.ua</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="description" content="Аренда банкетных залов в Киеве на сайте bankets.com.ua — это удобный поиск предложений от ведущих компаний. Аренда залов для банкетов в кафе и ресторанах. Все банкетные залы Киева. Банкетные залы в Киеве с фото, адресами, ценами - bankets.com.ua. " />
+    <meta name="keywords" content="банкетные залы в Киеве, банкетный зал, банкетные залы, банкеты" />
+
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.5/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen" />
-    <link href="../static/css/style.css"
-          th:href="@{/css/style.css}"
-          rel="stylesheet" media="screen" />
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" />
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 
@@ -22,11 +23,11 @@
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" th:href="@{/}" href="welcome/index.html">User management</a>
+                <a class="navbar-brand" th:href="@{/}" href="welcome/index.html">Банкетные залы в Киеве</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li th:classappend="${(#httpServletRequest.requestURI.equals('/')) ? 'active' : ''}"><a th:href="@{/}" href="welcome/index.html">Home</a></li>
+                    <!--<li th:classappend="${(#httpServletRequest.requestURI.equals('/')) ? 'active' : ''}"><a th:href="@{/}" href="welcome/index.html">Home</a></li>-->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li th:classappend="${(#httpServletRequest.requestURI.equals('/login')) ? 'active' : '' }" sec:authorize="!isAuthenticated()"><a href="../login.html" th:href="@{/login}">Login</a></li>
@@ -50,7 +51,7 @@
     </div>
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2015 Spring boot users management boilerplate</p>
+            <p>&copy; 2015 <a href="http://bankets.com.ua/">Аренда банкетных залов в Киеве</a></p>
         </div>
     </footer>
 </body>
